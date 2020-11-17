@@ -1,0 +1,13 @@
+{
+  "name": "14bis-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Matheusdoe-dev <matheusdoe.dev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^4.0.5"
+  },
+  "devDependencies": {
+    "ts-node": "^9.0.0"
+  }
+}
