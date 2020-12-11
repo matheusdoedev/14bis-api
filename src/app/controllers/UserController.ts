@@ -16,15 +16,6 @@ class UsersController {
         SN_ATIVO,
       } = req.body;
 
-      console.log({
-        NOME_COMPLETO,
-        EMAIL_LOGIN,
-        FONE_LOGIN,
-        SENHA,
-        ID_PERFIL,
-        SN_ATIVO,
-      });
-
       // password must be more than or equal 6 characters
       if (SENHA.length < 6) {
         return res.status(400).send({
