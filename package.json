@@ -8,8 +8,8 @@
     "build": "tsc --outDir build",
     "predev": "NODE_ENV=dev sequelize db:create",
     "dev": "NODE_ENV=dev ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server/server.ts",
-    "pretest": "NODE_ENV=test sequelize db:migrate",
-    "test": "NODE_ENV=test jest",
+    "pretest": "NODE_ENV=test sequelize db:migrate:undo:all && rm --force ./tests/database.sqlite && NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test jest --coverage",
     "posttest": "NODE_ENV=test sequelize db:migrate:undo:all && rm --force ./tests/database.sqlite"
   },
   "license": "MIT",
