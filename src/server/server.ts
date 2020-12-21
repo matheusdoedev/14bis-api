@@ -1,6 +1,6 @@
-import app from "../app";
+import app from '../app';
 // db
-import { sequelize } from "../app/models/index";
+import { sequelize } from '../app/models/index';
 
 const PORT = process.env.PORT || 3333;
 
