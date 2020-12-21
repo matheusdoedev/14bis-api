@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 // utils
-import generateToken from "../../utils/generateToken";
+import generateToken from '../../utils/generateToken';
 // models
-import User from "../models/User";
+import User from '../models/User';
 
 class UsersController {
   static async postUserCreate(req: Request, res: Response) {
@@ -19,7 +19,7 @@ class UsersController {
       // password must be more than or equal 6 characters
       if (SENHA.length < 6) {
         return res.status(400).send({
-          error: "A senha deve ter pelo menos 6 caracteres",
+          error: 'A senha deve ter pelo menos 6 caracteres',
         });
       }
 
@@ -34,23 +34,67 @@ class UsersController {
         SN_ATIVO,
       };
 
-      // saving user data on users migration
+      // saving user data on users migration and getting registered user id
       const insertedUser = await User.create(user).then((r) => r.get());
 
-      // getting registered user ID_USUARIO
-      const userId = insertedUser.ID_USUARIO;
-
       // token
-      const token = generateToken({ ID_USUARIO: userId });
+      const token = generateToken({ ID_USUARIO: insertedUser.ID_USUARIO });
 
       // reseting req.body password
       SENHA = undefined;
 
-      return res.json({ user_id: userId, token, ID_PERFIL, SN_ATIVO });
-    } catch (error) {
-      console.log(error);
-      return res.status(400).send({ error: "Erro ao criar usuário" });
+      return res.json({
+        user_id: insertedUser.ID_USUARIO,
+        token,
+        ID_PERFIL,
+        SN_ATIVO,
+      });
+    } catch (err) {
+      return res.status(400).json({ message: 'Erro ao criar o usuário', err });
     }
+  }
+
+  static async getUserData(req: Request, res: Response) {
+    const { ID_USUARIO } = req.params;
+
+    // searching in database if a user with this email send on red.body exists
+    const user = await User.findOne({
+      where: {
+        ID_USUARIO,
+      },
+    }).then((r) => r?.get());
+
+    // check if user exists
+    if (!user) {
+      return res.status(400).json({ message: 'Erro ao obter usuário' });
+    }
+
+    return res.json({ ...user });
+  }
+
+  static async putUserData(req: Request, res: Response) {
+    let { NOME_COMPLETO, EMAIL_LOGIN, FONE_LOGIN, SENHA } = req.body;
+
+    const { ID_USUARIO } = req.params;
+
+    await User.update(
+      {
+        NOME_COMPLETO,
+        EMAIL_LOGIN,
+        FONE_LOGIN,
+        SENHA,
+      },
+      {
+        where: {
+          ID_USUARIO,
+        },
+      }
+    );
+
+    // reseting req.body password
+    SENHA = undefined;
+
+    return res.json({ message: 'Usuário atualizado' });
   }
 }
 

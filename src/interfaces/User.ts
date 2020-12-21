@@ -5,6 +5,6 @@ export interface UserProps {
   EMAIL_LOGIN: string;
   FONE_LOGIN: string;
   SENHA: string;
-  ID_PERFIL: string;
+  ID_PERFIL: 'MENTO' | 'EMPRE' | 'ADMIN' | 'INVES' | 'CONSU';
   SN_ATIVO: string;
 }
