@@ -1,47 +1,45 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 // utils
-import generateToken from "../../utils/generateToken";
+import generateToken from '../../utils/generateToken';
 // models
-import User from "../models/User";
+import User from '../models/User';
 
 class SessionController {
-    static async postUserAuthentication(req: Request, res: Response) {
-        try {
-            let { EMAIL_LOGIN, SENHA } = req.body;
+  static async postUserAuthentication(req: Request, res: Response) {
+    let { EMAIL_LOGIN, SENHA } = req.body;
 
-            // searching in database if a user with this email send on red.body exists
-            const user = await User.findAll({
-                where: {
-                    EMAIL_LOGIN,
-                },
-            });
+    // searching in database if a user with this email send on red.body exists
+    const user = await User.findOne({
+      where: {
+        EMAIL_LOGIN,
+      },
+    }).then((r) => r?.get());
 
-            // checks if haven't found a valid email
-            if (user.length <= 0) {
-                return res.status(400).send({ error: "Usuário não encontrado/e-mail inválido" });
-            }
-
-            if (user[0].getDataValue("SENHA") !== SENHA) {
-                return res.status(400).send({ error: "Senha incorreta." });
-            }
-
-            // token
-            const token = generateToken({ id: user[0].getDataValue("ID_USUARIO") });
-
-            // reseting req.body password
-            SENHA = undefined;
-
-            return res.json({
-                user_id: user[0].getDataValue("ID_USUARIO"),
-                perfil: user[0].getDataValue("ID_PERFIL"),
-                sn_ativo: user[0].getDataValue("SN_ATIVO"),
-                token,
-            });
-        } catch (error) {
-            console.log(error);
-            return res.status(400).send({ error: "Erro de autenticação de usuário" });
-        }
+    // checks if haven't found a valid email
+    if (!user) {
+      return res
+        .status(400)
+        .send({ error: 'Usuário não encontrado/e-mail inválido' });
     }
+
+    // check if the "SENHA" is valid
+    if (user.SENHA !== SENHA) {
+      return res.status(400).json({ message: 'Senha incorreta.' });
+    }
+
+    // token
+    const token = generateToken({ id: user.ID_USUARIO });
+
+    // reseting req.body password
+    SENHA = undefined;
+
+    return res.json({
+      user_id: user.ID_USUARIO,
+      perfil: user.ID_PERFIL,
+      sn_ativo: user.SN_ATIVO,
+      token,
+    });
+  }
 }
 
 export default SessionController;
