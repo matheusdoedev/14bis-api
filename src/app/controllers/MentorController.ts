@@ -80,10 +80,29 @@ class MentorController {
   }
 
   static async putMentorData(req: Request, res: Response) {
-    try {
-      const {
+    const {
+      CPF,
+      DT_NASCIMENTO,
+      SEXO,
+      CEP,
+      ENDERECO,
+      UF,
+      CIDADE,
+      FONE_FIXO,
+      FONE_CELULAR,
+      LINKEDIN,
+      ESCOLARIDADE,
+      ID_AREA_ATUACAO,
+      CURRICULO_RESUMIDO,
+      CAMINHO_FOTO,
+    } = req.body;
+
+    const { ID_USUARIO } = req.params;
+
+    await Mentor.update(
+      {
         CPF,
-        DT_NASCIMENTO,
+        DT_NASCIMENTO: parseStringToDate(DT_NASCIMENTO),
         SEXO,
         CEP,
         ENDERECO,
@@ -93,37 +112,14 @@ class MentorController {
         FONE_CELULAR,
         LINKEDIN,
         ESCOLARIDADE,
-        ID_AREA_ATUACAO,
+        ID_AREA_ATUACAO: Number(ID_AREA_ATUACAO),
         CURRICULO_RESUMIDO,
         CAMINHO_FOTO,
-      } = req.body;
+      },
+      { where: { ID_MENTOR: ID_USUARIO } }
+    );
 
-      const { ID_USUARIO } = req.params;
-
-      await Mentor.update(
-        {
-          CPF,
-          DT_NASCIMENTO: parseStringToDate(DT_NASCIMENTO),
-          SEXO,
-          CEP,
-          ENDERECO,
-          UF,
-          CIDADE,
-          FONE_FIXO,
-          FONE_CELULAR,
-          LINKEDIN,
-          ESCOLARIDADE,
-          ID_AREA_ATUACAO: Number(ID_AREA_ATUACAO),
-          CURRICULO_RESUMIDO,
-          CAMINHO_FOTO,
-        },
-        { where: { ID_MENTOR: ID_USUARIO } }
-      );
-
-      return res.json({ ID_USUARIO });
-    } catch (err) {
-      return res.status(400).json({ message: 'Erro ao obter Mentor', err });
-    }
+    return res.json({ ID_USUARIO });
   }
 }
 

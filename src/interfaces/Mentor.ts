@@ -2,7 +2,7 @@
 export interface MentorProps {
   ID_MENTOR: number;
   CPF: string;
-  DT_NASCIMENTO: Date;
+  DT_NASCIMENTO: Date | undefined;
   SEXO: string;
   CEP: string;
   ENDERECO: string;

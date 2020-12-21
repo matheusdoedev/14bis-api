@@ -1,8 +1,8 @@
-import { Sequelize, Options } from "sequelize";
-import dotenv from "dotenv";
+import { Sequelize, Options } from 'sequelize';
+import dotenv from 'dotenv';
 
 dotenv.config({
-  path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
 });
 
 interface ConfigProps extends Options {
@@ -10,7 +10,7 @@ interface ConfigProps extends Options {
   username: string;
   password: string;
   database: string;
-  dialect: "mysql" | "postgres" | "sqlite" | "mariadb" | "mssql" | undefined;
+  dialect: 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | undefined;
 }
 
 const config: ConfigProps = {
@@ -18,8 +18,8 @@ const config: ConfigProps = {
   username: String(process.env.DB_USER),
   password: String(process.env.DB_PASS),
   database: String(process.env.DB_NAME),
-  dialect: process.env.NODE_ENV === "test" ? "sqlite" : "mysql",
-  storage: "./tests/database.sqlite",
+  dialect: process.env.NODE_ENV === 'test' ? 'sqlite' : 'mysql',
+  storage: './tests/database.sqlite',
   define: {
     timestamps: false,
   },
