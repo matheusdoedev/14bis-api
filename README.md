@@ -88,6 +88,6 @@ Author: Matheus do É Santos – [Linkedin](https://www.linkedin.com/in/matheusd
 [top-languages]: https://img.shields.io/github/languages/top/matheusdoedev/14bis-api?style=flat-square
 [repo-size]: https://img.shields.io/github/repo-size/matheusdoedev/14bis-api?style=flat-square
 [repo-license]: https://img.shields.io/github/license/matheusdoedev/14bis-api?style=flat-square
-[repo-version]: https://img.shields.io/github/package-json/v/matheusdoedev/14bis-api-api?style=flat-square
+[repo-version]: https://img.shields.io/github/package-json/v/matheusdoedev/14bis-api?style=flat-square
 [matheus-img]: https://img.shields.io/badge/matheusdoedev-%23811662?style=flat-square
 [matheus-url]: https://matheusdoe.dev
