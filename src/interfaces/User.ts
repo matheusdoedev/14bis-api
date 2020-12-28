@@ -1,4 +1,4 @@
-// User model props
+// User model types
 export interface UserProps {
   ID_USUARIO?: number;
   NOME_COMPLETO: string;

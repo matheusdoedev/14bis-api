@@ -1,8 +1,8 @@
 import Sequelize, { Model, ModelCtor } from 'sequelize';
-// interfaces
+
 import { StartupProps } from '../../interfaces/Startup';
 import { sequelize } from './index';
-// models
+
 import User from './User';
 
 const Startup: ModelCtor<Model<StartupProps>> = sequelize.define('STARTUP', {

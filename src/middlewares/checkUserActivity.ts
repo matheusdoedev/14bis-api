@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-// models
+
 import User from '../app/models/User';
 
 export default async function checkUserActivity(
@@ -9,10 +9,10 @@ export default async function checkUserActivity(
 ) {
   const { ID_USUARIO } = req.params;
 
-  // search user
+  // finding user
   const user = await User.findOne({ where: { ID_USUARIO } });
 
-  // check if this  user exists or his account is active
+  // check if this user exists or his account is active
   if (user?.getDataValue('SN_ATIVO') === 'N' || !user) {
     return res
       .status(400)

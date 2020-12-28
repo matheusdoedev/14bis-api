@@ -1,8 +1,8 @@
 import Sequelize, { Model, ModelCtor } from 'sequelize';
-// interfaces
+
 import { MentorProps } from '../../interfaces/Mentor';
 import { sequelize } from './index';
-// models
+
 import User from './User';
 
 const Mentor: ModelCtor<Model<MentorProps>> = sequelize.define('MENTOR', {

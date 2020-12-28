@@ -1,4 +1,4 @@
-// Startup Props
+// Startup model types
 export interface StartupProps {
   ID_STARTUP: number;
   NOME_FANTASIA: string;

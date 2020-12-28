@@ -1,7 +1,7 @@
 import express from 'express';
-// controller
+
 import MentorController from '../app/controllers/MentorController';
-// middlewares
+
 import checkUserActivity from '../middlewares/checkUserActivity';
 
 const routes = express.Router();

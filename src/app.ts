@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-// routes
+
 import usersRoutes from './routes/users';
 import startupsRoutes from './routes/startups';
 import mentorRoutes from './routes/mentor';

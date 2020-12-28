@@ -7,6 +7,7 @@ import Mentor from '../../src/app/models/Mentor';
 // interfaces
 import { UserProps } from './../../src/interfaces/User';
 import { StartupProps } from './../../src/interfaces/Startup';
+import { MentorProps } from './../../src/interfaces/Mentor';
 
 factory.define<UserProps>('User', User, {
   NOME_COMPLETO: faker.name.findName(),
@@ -38,6 +39,24 @@ factory.define<StartupProps>('Startup', Startup, {
   ENDERECO: faker.address.streetName(),
   UF: faker.address.state(),
   CIDADE: faker.address.city(),
+});
+
+factory.define<MentorProps>('Mentor', Mentor, {
+  ID_MENTOR: 1,
+  CPF: '88899977755',
+  DT_NASCIMENTO: faker.date.past(),
+  SEXO: 'F',
+  CEP: '44555999',
+  ENDERECO: faker.address.streetName(),
+  UF: faker.address.state(),
+  CIDADE: faker.address.city(),
+  FONE_FIXO: faker.phone.phoneNumber(),
+  FONE_CELULAR: faker.phone.phoneNumber(),
+  LINKEDIN: '',
+  ESCOLARIDADE: 'Superior completo',
+  ID_AREA_ATUACAO: 2,
+  CURRICULO_RESUMIDO: '',
+  CAMINHO_FOTO: '',
 });
 
 export default factory;

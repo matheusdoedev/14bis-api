@@ -1,4 +1,4 @@
-// User model props
+// Mentor model types
 export interface MentorProps {
   ID_MENTOR: number;
   CPF: string;
@@ -12,7 +12,7 @@ export interface MentorProps {
   FONE_CELULAR: string;
   LINKEDIN: string;
   ESCOLARIDADE: string;
-  ID_AREA_ATUACAO: number;
+  ID_AREA_ATUACAO: number | undefined;
   CURRICULO_RESUMIDO: string;
   CAMINHO_FOTO: string;
 }

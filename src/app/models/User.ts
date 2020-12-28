@@ -1,9 +1,10 @@
-import Sequelize, { Model, ModelCtor } from "sequelize";
-// interfaces
-import { UserProps } from "../../interfaces/User";
-import { sequelize } from "./index";
+import Sequelize, { Model, ModelCtor } from 'sequelize';
 
-const User: ModelCtor<Model<UserProps>> = sequelize.define("USUARIOs", {
+import { UserProps } from '../../interfaces/User';
+
+import { sequelize } from './index';
+
+const User: ModelCtor<Model<UserProps>> = sequelize.define('USUARIOs', {
   ID_USUARIO: {
     type: Sequelize.INTEGER,
     primaryKey: true,
