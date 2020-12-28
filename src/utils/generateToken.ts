@@ -1,11 +1,14 @@
-import jwt from "jsonwebtoken";
-import authConfig from "../config/auth";
+import jwt from 'jsonwebtoken';
 
-// jwt token generator
+import authConfig from '../config/auth';
+
+// jwt sign token generator
 const generateToken = (params = {}) => {
-  return jwt.sign(params, authConfig.secret, {
+  const token = jwt.sign(params, authConfig.secret, {
     expiresIn: 86400,
   });
+
+  return token ? token : null;
 };
 
 export default generateToken;

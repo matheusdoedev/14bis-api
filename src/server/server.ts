@@ -1,6 +1,6 @@
-import app from "../app";
-// db
-import { sequelize } from "../app/models/index";
+import app from '../app';
+
+import { sequelize } from '../app/models/index';
 
 const PORT = process.env.PORT || 3333;
 
@@ -12,5 +12,5 @@ sequelize
     });
   })
   .catch((err) => {
-    console.log(`Error on datapase, ${err}.`);
+    console.log(`Error on database, ${err}.`);
   });
