@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-// utils
+
 import generateToken from '../../utils/generateToken';
-// models
+
 import User from '../models/User';
 
 class SessionController {
@@ -27,7 +27,6 @@ class SessionController {
       return res.status(400).json({ message: 'Senha incorreta.' });
     }
 
-    // token
     const token = generateToken({ id: user.ID_USUARIO });
 
     // reseting req.body password
