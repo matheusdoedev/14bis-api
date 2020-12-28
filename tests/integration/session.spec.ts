@@ -3,25 +3,29 @@ import * as faker from 'faker';
 
 import app from '../../src/app';
 
+import truncate from '../utils/truncate';
+import factory from '../utils/factories';
+
+import { UserProps } from './../../src/interfaces/User';
+
 describe('Session authentication', () => {
+  // truncating tables before each test
+  beforeEach(async () => {
+    await truncate();
+  });
+
   it('should authenticate user with valid credentials', async () => {
-    const user = {
-      NOME_COMPLETO: faker.name.findName(),
-      EMAIL_LOGIN: faker.internet.email(),
-      FONE_LOGIN: faker.phone.phoneNumber(),
-      SENHA: '12345678',
-      ID_PERFIL: 'EMPRE',
-      SN_ATIVO: 'S',
-    };
+    await factory
+      .create<UserProps>('User')
+      .then(async ({ EMAIL_LOGIN, SENHA }) => {
+        const response = await request(app).post('/users/authentication').send({
+          EMAIL_LOGIN,
+          SENHA,
+        });
 
-    await request(app).post('/users').send(user);
-
-    const response = await request(app).post('/users/authentication').send({
-      EMAIL_LOGIN: user.EMAIL_LOGIN,
-      SENHA: user.SENHA,
-    });
-
-    expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty('token');
+      })
+      .catch((err) => console.log(err));
   });
 
   it('should return error with invalid email', async () => {
@@ -34,8 +38,10 @@ describe('Session authentication', () => {
   });
 
   it('should return error with invalid password', async () => {
+    const { EMAIL_LOGIN } = await factory.create<UserProps>('User');
+
     const response = await request(app).post('/users/authentication').send({
-      EMAIL_LOGIN: faker.internet.email(),
+      EMAIL_LOGIN,
       SENHA: '12345',
     });
 
