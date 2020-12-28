@@ -4,6 +4,7 @@
   "main": "src/server/server.ts",
   "author": "Matheusdoe-dev <matheusdoe.dev@gmail.com>",
   "scripts": {
+    "prestart": "NODE_ENV=dev sequelize db:create",
     "start": "NODE_ENV=production yarn build && node build/server/server.js",
     "build": "tsc --outDir build",
     "predev": "NODE_ENV=dev sequelize db:create",
