@@ -14,7 +14,9 @@
     ".sequelizerc",
     "src/**/*.ts",
     "src/database/config.js",
-    "src/database/*.js"
+    "src/database/migrations/20201217190529-mentors.js",
+    "src/database/migrations/20201212181300-startups.js",
+    "src/database/migrations/20201124200608-users.js"
   ],
   "exclude": ["node_modules"]
 }
